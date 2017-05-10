@@ -1,0 +1,11 @@
+[Unit]
+Description=SystemWide Container Registries
+Before=docker.service
+After=network.target
+
+[Service]
+Type=oneshot
+ExecStart=/usr/libexec/registries -o /run/containers/registries.conf -V REGISTRIES
+
+[Install]
+WantedBy=multi-user.target

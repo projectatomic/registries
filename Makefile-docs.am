@@ -1,0 +1,6 @@
+GO_MD2MAN ?= /usr/bin/go-md2man
+
+man1_MANS = registries.1
+
+registries.1: docs/registries.1.md Makefile
+		$(GO_MD2MAN) -in $< -out docs/$@

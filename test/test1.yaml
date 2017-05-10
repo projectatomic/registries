@@ -1,0 +1,10 @@
+registries:
+  - registry1
+  - registry1a
+
+insecure_registries:
+  - registry2
+
+block_registries:
+  - registry3
+
