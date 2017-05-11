@@ -1,38 +1,16 @@
-# This is a sample .redhat-ci.yml which documents all the
-# supported fields. You can validate your .redhat-ci.yml
-# file by using the validator.py script. It must be in UTF-8
-# format (though only fields denoted to support UTF-8 can
-# contain non-ASCII values).
+branches:
+  - master
+  - auto
+  - try
 
-# REQUIRED (only one of 'host' or 'container' or 'cluster')
-# Provision a single host.
 container:
-    # REQUIRED
-    # Specify an FQIN or Docker Hub image.
     image: registry.fedoraproject.org/fedora:25
 
-# OPTIONAL
-# GitHub commit status context to use when reporting back
-# status updates to GitHub. If omitted, defaults to
-# 'Red Hat CI'.
-context: 'CI Tester'
-
-# OPTIONAL
-# Mark this testsuite as required. This causes a special
-# "required" context to be reported to GitHub on branch
-# tests. The result is set to successful only if all
-# testsuites marked as required are also successful. This is
-# useful for integration with merge bots, so that they only
-# need to watch for a single status rather than multiple
-# (possibly changing) statuses. If omitted, defaults to
-# false.
+context: 'f25-build-check'
 required: true
 
-
-# OPTIONAL
-# List of packages to install during provisioning. If
-# running on an Atomic Host variant, packages will be
-# layered.
+# Build with deps
+build: true
 packages:
     - make
     - automake
@@ -43,30 +21,10 @@ packages:
     - json-glib-devel
     - autoconf
 
-
-# REQUIRED (at least one of 'build' or 'tests')
-# If the project follows the Build API (see
-# https://github.com/cgwalters/build-api), you may specify
-# the 'build' key to automatically build the code.
-build: true
-
-
-# REQUIRED (at least one of 'build' or 'tests')
-# Put the tasks to be executed in the 'tests' key. They are
-# run from the root of the repo. If the 'build' key is also
-# present, tests will run after a successful build. Full
-# UTF-8 values are supported.
+# And call into automake
 tests:
     - make check
 
-# OPTIONAL
-# Time to allow before aborting tests. Must satisfy regex
-# '[0-9]+[smh]'. If omitted, defaults to '2h', which is the
-# maximum.
-timeout: 30m
-
-# OPTIONAL
-# List of files/directories to upload to Amazon S3.
 artifacts:
     - test-suite.log
 
