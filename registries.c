@@ -1,3 +1,7 @@
+// Copyright (C) 2017 Red Hat
+// AUTHOR: Brent Baude<bbaude@redhat.com>
+// see file 'COPYING' for use and warranty information
+
 #include <yaml.h>
 #include <stdio.h>
 #include <assert.h>
