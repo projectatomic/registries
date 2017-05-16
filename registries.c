@@ -135,10 +135,10 @@ gchar* get_switch_from_header(char *header) {
 		ret = " --add-registry ";
 	}
 	else if (g_strcmp0("insecure_registries", header) == 0){
-		ret = " --insecure_registries ";
+		ret = " --insecure-registry ";
 	}
 	else if (g_strcmp0("block_registries", header) == 0){
-		ret = " --block_registries ";
+		ret = " --block-registry ";
 	}
 	return ret;
 }
