@@ -4,10 +4,10 @@ IFS=$'\n\t'
 #set -x
 #declare -a STR_RESULT
 # Test Suite for registry YAML parsing
-STR_RESULT[0]=' --block_registries registry3 --insecure_registries registry2 --add-registry registry1'
+STR_RESULT[0]=' --block-registry registry3 --insecure-registry registry2 --add-registry registry1'
 JSON_RESULT[0]='{"block_registries":["registry3"],"insecure_registries":["registry2"],"registries":["registry1"]}'
 
-STR_RESULT[1]=' --block_registries registry3 --insecure_registries registry2 --add-registry registry1 --add-registry registry1a'
+STR_RESULT[1]=' --block-registry registry3 --insecure-registry registry2 --add-registry registry1 --add-registry registry1a'
 JSON_RESULT[1]='{"block_registries":["registry3"],"insecure_registries":["registry2"],"registries":["registry1","registry1a"]}'
 
 STR_RESULT[2]=' --add-registry registry1 --add-registry registry1a'
@@ -27,8 +27,6 @@ JSON_RESULT5='{}'
 PWD=$(pwd)
 TEST_DIR="${PWD}/test"
 BINARY="${PWD}/registries"
-##echo ${PWD}
-##echo ${STR_RESULT[*]}
 counter=0;
 error=0;
 space="     "
@@ -59,7 +57,7 @@ done
 # TEST THE VALUE OUTPUT
 TMP_FILE='/tmp/registries_tmp.out'
 ${BINARY} -i "${TEST_DIR}/test1.yaml" -V REGISTRIES -o "${TMP_FILE}"
-RESULTS='REGISTRIES=" --block_registries registry3 --insecure_registries registry2 --add-registry registry1 --add-registry registry1a"'
+RESULTS='REGISTRIES=" --block-registry registry3 --insecure-registry registry2 --add-registry registry1 --add-registry registry1a"'
 TMP_FILE_CONTENTS=$(cat ${TMP_FILE})
 if [[ "${TMP_FILE_CONTENTS}" == "${RESULTS}" ]]; then
 	echo "${space} Output test passed"
