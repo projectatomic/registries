@@ -19,6 +19,29 @@ GPtrArray* tmp_values;
 char * headers [] = { "registries", "insecure_registries", "block_registries" };
 gchar *cur_header = "None";
 
+/*
+ * Check if registries are still being exported from
+ * sysconfig
+ */
+void check_envs(){
+	char *env_variables[] = {
+			"ADD_REGISTRY",
+			"INSECURE_REGISTRY",
+			"BLOCK_REGISTRY",
+			0
+
+	};
+	for (char** p = env_variables; p; p++) {
+		if (getenv(*p) != NULL) {
+			fprintf(stderr, "Registry information should be stored in "
+					"/etc/containers/registries.conf and not in "
+					"/etc/sysconfig/docker\n");
+		}
+		break;
+	}
+
+
+}
 
 /*
  * Add  a single value to the tmp_array
@@ -245,6 +268,8 @@ int main(int argc, char *argv[])
 	// Global vars
 	hash = g_hash_table_new_full(g_str_hash, g_str_equal, NULL, NULL);
 	tmp_values = g_ptr_array_new();
+
+	check_envs();
 
 	static gboolean json = FALSE;
 	static gchar *input_file;

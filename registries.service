@@ -4,6 +4,7 @@ Before=docker.service
 After=network.target
 
 [Service]
+EnvironmentFile=-/etc/sysconfig/docker
 Type=oneshot
 ExecStart=/usr/libexec/registries -o /run/containers/registries.conf -V REGISTRIES
 
