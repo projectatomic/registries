@@ -16,4 +16,5 @@ AC_CHECK_PROG(GO_MD2MAN_CHECK,go-md2man,yes)
 if test x"$GO_MD2MAN_CHECK" != x"yes" ; then
     AC_MSG_ERROR([Please install go-md2man.])
 fi
+AM_PROG_CC_C_O
 AC_OUTPUT
