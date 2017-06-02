@@ -65,7 +65,7 @@ void destroy_tmp_array(){
  */
 bool is_string_header(char* header)
 {
-	int i;
+	size_t i;
 	for (i=0; i < sizeof(headers)/sizeof(headers[0]); i++ ) {
 		if (!strcmp(headers[i], header)){
 			return TRUE;
@@ -176,7 +176,7 @@ gchar* build_string(){
 	// Build hash lookup
 	GList *keys;
 	keys = g_hash_table_get_keys(hash);
-	for (gint i=0; i< g_list_length(keys); i++){
+	for (guint i=0; i< g_list_length(keys); i++){
 		gchar* key = g_list_nth_data(keys, i);
 		gchar* command_switch = get_switch_from_header(key);
 		GPtrArray* values = g_hash_table_lookup(hash, key);
@@ -200,7 +200,7 @@ gchar* build_json() {
 	json_builder_begin_object (builder);
 
 	keys = g_hash_table_get_keys(hash);
-	for (gint i=0; i< g_list_length(keys); i++){
+	for (guint i=0; i< g_list_length(keys); i++){
 		gchar* key = g_list_nth_data(keys, i);
 		if (g_strcmp0(key, "None") == 0)
 			continue;
@@ -253,6 +253,10 @@ void check_file(gchar *file_name){
  * output_variable="output"
  */
 void write_to_file(gchar *output, gchar *output_file, gchar *output_variable){
+	if (access(g_path_get_dirname(output_file), W_OK) != 0) {
+		fprintf(stderr, "Unable to write the file %s\n", output_file);
+		exit (1);
+	}
 	FILE *fp;
 	fp = fopen(output_file, "w+");
 	if (output_variable){
@@ -338,7 +342,8 @@ int main(int argc, char *argv[])
 	if (error == 1)
 		return error;
 
-	g_autofree gchar* output;
+	//g_autofree gchar *output = " ";
+	gchar* output = NULL;
 
 	if (json){
 		output = build_json();
@@ -347,15 +352,17 @@ int main(int argc, char *argv[])
 	else {
 	 output = build_string();
 	}
+
 	if (output_file){
 		gchar* output_path = g_path_get_dirname(output_file);
 		//Create the directories in the output path
 		g_mkdir_with_parents (output_path, 755);
 		write_to_file(output, output_file, output_variable);
 	}
-	else
+	else {
 		printf("%s\n", output);
+	}
 
-	 g_option_context_free(context);
+	g_option_context_free(context);
 
 }
