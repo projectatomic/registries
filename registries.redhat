@@ -9,8 +9,8 @@
 # and 'block_registries'.
 
 
-#registries:
-#  - registry.access.redhat.com
+registries:
+  - registry.access.redhat.com
 
 
 # If you need to access insecure registries, uncomment the section below
