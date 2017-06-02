@@ -19,7 +19,8 @@ JSON_RESULT[3]='{"registries":["registry1","registry1a"]}'
 STR_RESULT[4]=' --add-registry registry1 --add-registry registry1a'
 JSON_RESULT[4]='{"registries":["registry1","registry1a"]}'
 
-JSON_RESULT5='{}'
+STR_RESULT[5]=''
+JSON_RESULT[5]='{}'
 
 #TEST99
 #test/test99.yaml is invalid YAML
