@@ -13,17 +13,16 @@
 #include <unistd.h>
 #include <json-glib/json-glib.h>
 
-GArray *registries;
-GHashTable* hash;
-GPtrArray* tmp_values;
-char * headers [] = { "registries", "insecure_registries", "block_registries" };
-gchar *cur_header = "None";
+static GHashTable* hash;
+static GPtrArray* tmp_values;
+static char * headers [] = { "registries", "insecure_registries", "block_registries" };
+static gchar *cur_header = "None";
 
 /*
  * Check if registries are still being exported from
  * sysconfig
  */
-void check_envs(){
+static void check_envs(void){
 	char *env_variables[] = {
 			"ADD_REGISTRY",
 			"INSECURE_REGISTRY",
@@ -46,14 +45,14 @@ void check_envs(){
 /*
  * Add  a single value to the tmp_array
  */
-void add_value_to_tmp_array(char* value){
+static void add_value_to_tmp_array(char* value){
 	g_ptr_array_add(tmp_values, g_strdup(value));
 }
 
 /*
  * Destroy the temporary array and recreate blank
  */
-void destroy_tmp_array(){
+static void destroy_tmp_array(void){
 	g_ptr_array_free(tmp_values, TRUE);
 	tmp_values = g_ptr_array_new();
 }
@@ -63,7 +62,7 @@ void destroy_tmp_array(){
  *
  * Returns: bool
  */
-bool is_string_header(char* header)
+static bool is_string_header(char* header)
 {
 	size_t i;
 	for (i=0; i < sizeof(headers)/sizeof(headers[0]); i++ ) {
@@ -78,7 +77,7 @@ bool is_string_header(char* header)
  * Iterates the tmp_array values and adds them to a new
  * NULL terminated ptr_array
  */
-GPtrArray* assemble_array(){
+static GPtrArray* assemble_array(void){
 	GPtrArray* store_values = g_ptr_array_new();
 	for (guint i = 0; i < tmp_values->len; i++) {
 		g_ptr_array_add(store_values, g_ptr_array_index(tmp_values, i));
@@ -91,7 +90,7 @@ GPtrArray* assemble_array(){
 /*
  * Iterates (recursively if needed) the YAML "tree" from the parser
  */
-void print_yaml_node(yaml_document_t *document_p, yaml_node_t *node, bool header)
+static void print_yaml_node(yaml_document_t *document_p, yaml_node_t *node, bool header)
 {
 	char* heading;
 	switch(node->type){
@@ -152,7 +151,7 @@ void print_yaml_node(yaml_document_t *document_p, yaml_node_t *node, bool header
  *
  * Returns: gchar*
  */
-gchar* get_switch_from_header(char *header) {
+static gchar* get_switch_from_header(char *header) {
 	gchar* ret = NULL;
 	if (g_strcmp0 ("registries", header) == 0) {
 		ret = " --add-registry ";
@@ -171,7 +170,7 @@ gchar* get_switch_from_header(char *header) {
  *
  * Returns: gchar*
  */
-gchar* build_string(){
+static gchar* build_string(void){
 	gchar *output = "";
 	// Build hash lookup
 	GList *keys;
@@ -192,7 +191,7 @@ gchar* build_string(){
  *
  * Returns: gchar*
  */
-gchar* build_json() {
+static gchar* build_json(void) {
 
 	GList *keys;
 	JsonBuilder *builder = json_builder_new ();
@@ -233,7 +232,7 @@ gchar* build_json() {
 /*
  * Ensures we the input file exists and we can read it
  */
-void check_file(gchar *file_name){
+static void check_file(gchar *file_name){
 	if (access(file_name, F_OK) == -1){
 		fprintf(stderr, "%s does not exist\n", file_name);
 		exit (1);
@@ -252,7 +251,7 @@ void check_file(gchar *file_name){
  *
  * output_variable="output"
  */
-void write_to_file(gchar *output, gchar *output_file, gchar *output_variable){
+static void write_to_file(gchar *output, gchar *output_file, gchar *output_variable){
 	if (access(g_path_get_dirname(output_file), W_OK) != 0) {
 		fprintf(stderr, "Unable to write the file %s\n", output_file);
 		exit (1);
