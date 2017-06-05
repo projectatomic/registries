@@ -17,6 +17,7 @@ AM_PROG_CC_C_O
 dnl The canonical version of this is in libostree
 CC_CHECK_FLAGS_APPEND([WARN_CFLAGS], [CFLAGS], [\
 -pipe \
+-std=gnu99 \
 -Wall \
 -Werror=empty-body \
 -Werror=strict-prototypes \
