@@ -39,6 +39,29 @@ static void check_envs(void){
 		break;
 	}
 
+/*
+ * Check if registries are still being exported from
+ * sysconfig
+ */
+void check_envs(){
+	char *env_variables[] = {
+			"ADD_REGISTRY",
+			"INSECURE_REGISTRY",
+			"BLOCK_REGISTRY",
+			0
+
+	};
+	for (char** p = env_variables; p; p++) {
+		if (getenv(*p) != NULL) {
+			fprintf(stderr, "Registry information should be stored in "
+					"/etc/containers/registries.conf and not in "
+					"/etc/sysconfig/docker\n");
+		}
+		break;
+	}
+
+
+}
 
 }
 
