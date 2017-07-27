@@ -4,9 +4,9 @@ branches:
   - try
 
 container:
-    image: registry.fedoraproject.org/fedora:25
+  image: registry.fedoraproject.org/fedora:26
 
-context: 'f25-build-check'
+context: 'f26-build-check'
 required: true
 
 # Build with deps
