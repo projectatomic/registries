@@ -1,0 +1,5 @@
+[registries.search]
+registries = ["registry1", "registry1a"]
+
+[registries.insecure2]
+registries = ["registry2"]

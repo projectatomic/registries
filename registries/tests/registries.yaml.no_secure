@@ -1,0 +1,5 @@
+insecure_registries:
+  - registry3
+
+block_registries:
+  - registry4

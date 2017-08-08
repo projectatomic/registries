@@ -1,8 +1,6 @@
 registries:
   - registry1
-
-insecure_registries:
   - registry2
 
-block_registries:
+insecure_registries:
   - registry3
