@@ -1,0 +1,2 @@
+[registries.search]
+registries = ["registry1", "registry1a"]

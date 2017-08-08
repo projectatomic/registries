@@ -1,0 +1,8 @@
+[registries.search]
+registries = ['registry1']
+
+[registries.insecure]
+registries = ['registry2']
+
+[registries.block]
+registries = ['registry3']
