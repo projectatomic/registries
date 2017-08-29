@@ -9,21 +9,15 @@ container:
 context: 'f26-build-check'
 required: true
 
-# Build with deps
-build: true
 packages:
+    - python3-pytoml
+    - python3-PyYAML
     - make
-    - automake
-    - gcc
-    - go-md2man
-    - libyaml-devel
-    - glib2-devel
-    - json-glib-devel
-    - autoconf
+    - golang-github-cpuguy83-go-md2man
+    - bats
 
-# And call into automake
 tests:
-    - make check
+    - make test
 
 artifacts:
     - test-suite.log

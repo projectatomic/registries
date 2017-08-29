@@ -2,7 +2,7 @@
 % Brent Baude
 % May 2017
 # NAME
-registries - parses a YAML configuration file for registries
+registries - parses a TOML configuration file for registries
 
 # SYNOPSIS
 **registries**
@@ -13,7 +13,7 @@ registries - parses a YAML configuration file for registries
 [**-V**][**--variable**]
 
 # DESCRIPTION
-**registries** parses a YAML configuration file about registries and has the
+**registries** parses a TOML configuration file about registries and has the
 ability to output in string or JSON formats.  By default, `registries` will
 put its output to stdout in string format.  The output is primarily for other
 programs.
@@ -67,6 +67,18 @@ You can also use the -i command line switch to read in a file other than the
 default input file:
 ```
 # registries -i /tmp/new_file
+```
+
+# MIGRATION FROM YAML
+The initial registries.conf files were based on a YAML structure.  This version  of registries
+still supports reading YAML.  However, you should preferably migrate the YAML to TOML.
+To do this, make a back up copy of `/etc/containers/registries.conf`.  Then run the
+registries_migrator tool which will output in the TOML format.  Verify the output
+looks correct and then pipe it to `/etc/containers/registries.conf`.  For example:
+
+```
+# /usr/libexec/registries_migrator > /etc/containers/registries.conf
+
 ```
 
 # HISTORY

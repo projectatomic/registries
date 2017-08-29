@@ -1,0 +1,7 @@
+[registries]
+additional = ['registry1.com']
+insecure = ['registry2.com', 'registry4.com']
+
+#blocked (docker only)
+blocked = ['registry3']
+
