@@ -28,12 +28,14 @@ JSON_RESULT[5]='{"registries.search": {"registries": []}, "registries.insecure":
 @test "yaml test 0" {
 	TN=0
 	run "$PYTHON" "$BINARY" -i "$TEST_DIR/test$TN.yaml"
+	echo "$output"
 	[ "$output" = "${STR_RESULT[$TN]}" ]
 }
 
 @test "yaml test 1" {
 	TN=1
 	run "$PYTHON" "$BINARY" -i "$TEST_DIR/test$TN.yaml"
+	echo "$output"
 	echo "${STR_RESULT[$TN]}"
 	[ "$output" = "${STR_RESULT[$TN]}" ]
 }
@@ -41,6 +43,7 @@ JSON_RESULT[5]='{"registries.search": {"registries": []}, "registries.insecure":
 @test "yaml test 2" {
 	TN=2
 	run "$PYTHON" "$BINARY" -i "$TEST_DIR/test$TN.yaml"
+	echo "$output"
 	echo "${STR_RESULT[$TN]}"
 	[ "$output" = "${STR_RESULT[$TN]}" ]
 }
@@ -49,6 +52,7 @@ JSON_RESULT[5]='{"registries.search": {"registries": []}, "registries.insecure":
 	TN=3
 	run "$PYTHON" "$BINARY" -i "$TEST_DIR/test$TN.yaml"
 	echo "${STR_RESULT[$TN]}"
+	echo "$output"
 	[ "$output" = "${STR_RESULT[$TN]}" ]
 }
 
@@ -56,48 +60,56 @@ JSON_RESULT[5]='{"registries.search": {"registries": []}, "registries.insecure":
 	TN=4
 	run "$PYTHON" "$BINARY" -i "$TEST_DIR/test$TN.yaml"
 	echo "${STR_RESULT[$TN]}"
+	echo "$output"
 	[ "$output" = "${STR_RESULT[$TN]}" ]
 }
 
 @test "yaml test 5" {
 	TN=5
 	run "$PYTHON" "$BINARY" -i "$TEST_DIR/test$TN.yaml"
+	echo "$output"
 	[ "$output" = "${STR_RESULT[$TN]}" ]
 }
 
 @test "yaml json test 0" {
 	TN=0
 	run "$PYTHON" "$BINARY" -j -i "$TEST_DIR/test$TN.yaml"
+	echo "$output"
 	[ "$output" = "${JSON_RESULT[$TN]}" ]
 }
 
 @test "yaml json test 1" {
 	TN=1
 	run "$PYTHON" "$BINARY" -j -i "$TEST_DIR/test$TN.yaml"
+	echo "$output"
 	[ "$output" = "${JSON_RESULT[$TN]}" ]
 }
 
 @test "yaml json test 2" {
 	TN=2
 	run "$PYTHON" "$BINARY" -j -i "$TEST_DIR/test$TN.yaml"
+	echo "$output"
 	[ "$output" = "${JSON_RESULT[$TN]}" ]
 }
 
 @test "yaml json test 3" {
 	TN=3
 	run "$PYTHON" "$BINARY" -j -i "$TEST_DIR/test$TN.yaml"
+	echo "$output"
 	[ "$output" = "${JSON_RESULT[$TN]}" ]
 }
 
 @test "yaml json test 4" {
 	TN=4
 	run "$PYTHON" "$BINARY" -j -i "$TEST_DIR/test$TN.yaml"
+	echo "$output"
 	[ "$output" = "${JSON_RESULT[$TN]}" ]
 }
 
 @test "yaml json test 5" {
 	TN=5
 	run "$PYTHON" "$BINARY" -j -i "$TEST_DIR/test$TN.yaml"
+	echo "$output"
 	[ "$output" = "${JSON_RESULT[$TN]}" ]
 }
 
@@ -109,12 +121,14 @@ JSON_RESULT[5]='{"registries.search": {"registries": []}, "registries.insecure":
 @test "toml test 0" {
 	TN=0
 	run "$PYTHON" "$BINARY" -i "$TEST_DIR/test$TN.toml"
+	echo "$output"
 	[ "$output" = "${STR_RESULT[$TN]}" ]
 }
 
 @test "toml test 1" {
 	TN=1
 	run "$PYTHON" "$BINARY" -i "$TEST_DIR/test$TN.toml"
+	echo "$output"
 	echo "${STR_RESULT[$TN]}"
 	[ "$output" = "${STR_RESULT[$TN]}" ]
 }
@@ -122,6 +136,7 @@ JSON_RESULT[5]='{"registries.search": {"registries": []}, "registries.insecure":
 @test "toml test 2" {
 	TN=2
 	run "$PYTHON" "$BINARY" -i "$TEST_DIR/test$TN.toml"
+	echo "$output"
 	echo "${STR_RESULT[$TN]}"
 	[ "$output" = "${STR_RESULT[$TN]}" ]
 }
@@ -130,6 +145,7 @@ JSON_RESULT[5]='{"registries.search": {"registries": []}, "registries.insecure":
 	TN=3
 	run "$PYTHON" "$BINARY" -i "$TEST_DIR/test$TN.toml"
 	echo "${STR_RESULT[$TN]}"
+	echo "$output"
 	[ "$output" = "${STR_RESULT[$TN]}" ]
 }
 
@@ -137,12 +153,14 @@ JSON_RESULT[5]='{"registries.search": {"registries": []}, "registries.insecure":
 	TN=4
 	run "$PYTHON" "$BINARY" -i "$TEST_DIR/test$TN.toml"
 	echo "${STR_RESULT[$TN]}"
+	echo "$output"
 	[ "$output" = "${STR_RESULT[$TN]}" ]
 }
 
 @test "toml test 5" {
 	TN=5
 	run "$PYTHON" "$BINARY" -i "$TEST_DIR/test$TN.toml"
+	echo "$output"
 	[ "$output" = "${STR_RESULT[$TN]}" ]
 }
 
@@ -158,6 +176,7 @@ registries = ["registry2"]
 
 ["registries.block"]
 registries = ["registry3"]'
+	echo "$output"
 	[ "$output" = "$RESULT" ]
 }
 
@@ -171,6 +190,7 @@ registries = ["registry2"]
 
 ["registries.block"]
 registries = ["registry3"]'
+	echo "$output"
 	[ "$output" = "$RESULT" ]
 }
 
@@ -185,6 +205,7 @@ registries = []
 ["registries.block"]
 registries = []'
 
+	echo "$output"
 	[ "$output" = "$RESULT" ]
 }
 
@@ -198,6 +219,7 @@ registries = []
 
 ["registries.block"]
 registries = []'
+	echo "$output"
 	[ "$output" = "$RESULT" ]
 }
 
@@ -211,6 +233,7 @@ registries = []
 
 ["registries.block"]
 registries = []'
+	echo "$output"
 	[ "$output" = "$RESULT" ]
 }
 
@@ -224,5 +247,6 @@ registries = []
 
 ["registries.block"]
 registries = []'
+	echo "$output"
 	[ "$output" = "$RESULT" ]
 }
