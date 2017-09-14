@@ -17,6 +17,7 @@ packages:
     - bats
 
 tests:
+    - make install DESTDIR=/
     - make test
 
 artifacts:
