@@ -21,7 +21,7 @@ docs/%.1: docs/%.1.md
 
 .PHONY: install
 install:
-	$(PYTHON) setup.py install
+	$(PYTHON) setup.py install  --install-scripts $(LIBEXEC) `test -n "$(DESTDIR)" && echo --root $(DESTDIR)`
 
 .PHONY: docs
 docs: $(MANPAGES_MD:%.md=%)
