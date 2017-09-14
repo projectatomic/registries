@@ -4,8 +4,8 @@ TEST=1
 PYTHON=${PYTHON:-/usr/bin/python3}
 PWD=$(pwd)
 TEST_DIR="${PWD}/test"
-BINARY="${PWD}/registries/registries.py"
-MIGRATOR="${PWD}/registries/registries_migrator.py"
+BINARY="/usr/libexec/registries"
+MIGRATOR="/usr/libexec/registries_migrator"
 
 STR_RESULT[0]='--add-registry registry1 --insecure-registry registry2 --block-registry registry3 '
 JSON_RESULT[0]='{"registries.search": {"registries": ["registry1"]}, "registries.insecure": {"registries": ["registry2"]}, "registries.block": {"registries": ["registry3"]}}'

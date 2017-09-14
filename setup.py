@@ -12,7 +12,7 @@ setuptools.setup(
     entry_points={
         'console_scripts': [
             'registries = registries.registries:registries',
-            'registries_migrator = registries.registries:migrate'
+            'registries_migrator = registries.registries_migrator:migrate'
         ]
     }
 )

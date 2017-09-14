@@ -1,4 +1,4 @@
-from registries import loadYAML
+from registries.registries import loadYAML
 import pytoml
 import argparse
 import sys
