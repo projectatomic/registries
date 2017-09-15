@@ -31,6 +31,9 @@ map_output = {
 
 
 def write_file(filename, data):
+    dir_path = os.path.dirname(filename)
+    if not os.path.exists(dir_path):
+        os.makedirs(dir_path)
     with open(filename,"w") as f:
         f.write(data)
 
