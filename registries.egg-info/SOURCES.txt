@@ -1,0 +1,10 @@
+setup.py
+/usr/libexec/registries
+registries/__init__.py
+registries/registries.py
+registries/registries_migrator.py
+registries.egg-info/PKG-INFO
+registries.egg-info/SOURCES.txt
+registries.egg-info/dependency_links.txt
+registries.egg-info/entry_points.txt
+registries.egg-info/top_level.txt

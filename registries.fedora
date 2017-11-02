@@ -10,6 +10,7 @@
 
 
 registries:
+  - docker.io
   - registry.fedoraproject.org
   - registry.access.redhat.com
 

@@ -1,0 +1,10 @@
+Metadata-Version: 1.0
+Name: registries
+Version: 0.1
+Summary: registry parser
+Home-page: http://github.com:projectatomic/registries
+Author: Brent Baude
+Author-email: bbaude@redhat.com
+License: GNU GPL
+Description: UNKNOWN
+Platform: UNKNOWN
