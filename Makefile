@@ -18,14 +18,17 @@ MANPAGES_MD = $(wildcard docs/*.md)
 docs/%.1: docs/%.1.md
 	$(GO_MD2MAN) -in $< -out $@.tmp && touch $@.tmp && mv $@.tmp $@
 
-.PHONY: install
-install:
-	$(PYTHON) setup.py install  --install-scripts usr/libexec `test -n "$(DESTDIR)" && echo --root $(DESTDIR)`
-
 .PHONY: docs
 docs: $(MANPAGES_MD:%.md=%)
 
+.PHONY: install-only
+install-only:
+	$(PYTHON) setup.py install  --install-scripts usr/libexec `test -n "$(DESTDIR)" && echo --root $(DESTDIR)`
+	install -d $(PREFIX)/share/man/man1
+	install -m 644 $(basename $(MANPAGES_MD)) $(PREFIX)/share/man/man1
 
+.PHONY: install
+install: all install-only
 
 .PHONY: clean
 clean:
