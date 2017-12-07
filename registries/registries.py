@@ -109,10 +109,15 @@ class loadTOML(Conf):
     @classmethod
     def get_registries(cls, conf_file):
         config = cls.load(conf_file)
-        reg = config['registries']
-        _registries = [] if 'search' not in reg else reg['search']
-        _insecure = {"registries": []} if 'insecure' not in reg else reg['insecure']
-        _block = {"registries":[]} if "block" not in reg else reg['block']
+        reg = config.get('registries', None)
+        if reg:
+            _registries = {"registries": []} if 'search' not in reg else reg['search']
+            _insecure = {"registries": []} if 'insecure' not in reg else reg['insecure']
+            _block = {"registries":[]} if "block" not in reg else reg['block']
+        else:
+            _registries = config.get("registries.search", {"registries": []})
+            _insecure = config.get("registries.insecure", {"registries": []})
+            _block = config.get("registries.block", {"registries": []})
         return to_dict(_registries, _insecure, _block)
 
 
