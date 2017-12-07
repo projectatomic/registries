@@ -250,3 +250,10 @@ registries = []'
 	echo "$output"
 	[ "$output" = "$RESULT" ]
 }
+
+# Quoted TOML Test
+@test "quoted toml test" {
+	run "$PYTHON" "$BINARY" -i "$TEST_DIR/test98.toml"
+    RESULT='--add-registry registry1 --insecure-registry registry2 --block-registry registry3 '
+	[ "$output" = "$RESULT" ]
+}
