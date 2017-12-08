@@ -74,10 +74,10 @@ The initial registries.conf files were based on a YAML structure.  This version 
 still supports reading YAML.  However, you should preferably migrate the YAML to TOML.
 To do this, make a back up copy of `/etc/containers/registries.conf`.  Then run the
 registries_migrator tool which will output in the TOML format.  Verify the output
-looks correct and then pipe it to `/etc/containers/registries.conf`.  For example:
+looks correct and then write it to `/etc/containers/registries.conf` with the -o switch.  For example:
 
 ```
-# /usr/libexec/registries_migrator > /etc/containers/registries.conf
+# /usr/libexec/registries_migrator -o  /etc/containers/registries.conf
 
 ```
 

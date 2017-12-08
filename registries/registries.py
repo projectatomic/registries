@@ -20,7 +20,7 @@ def log_warning(conf_file):
         handler.setFormatter(formatter)
         log.addHandler(handler)
         log.warning("{} is in YAML format and should be in TOML format. Back this file up and then "
-                    "use /usr/libexec/registries_migrator > /etc/containers/registries.conf to "
+                    "use /usr/libexec/registries_migrator -o /etc/containers/registries.conf to "
                     "convert it to TOML.".format(conf_file))
 
 map_output = {
