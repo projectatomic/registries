@@ -1,0 +1,8 @@
+[registries.search]
+registries = ["example-1.com:5000//", "example-2.com/"]
+
+[registries.insecure]
+registries = ["example-3.com:6000"]
+
+[registries.block]
+registries = ["example-4.com"]
