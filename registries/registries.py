@@ -38,7 +38,15 @@ def write_file(filename, data):
         f.write(data)
 
 
+def normalize_registry(registry):
+    registry["registries"] = [x.rstrip("/") for x in registry["registries"]]
+    return registry
+
+
 def to_dict(secure, insecure, block):
+    secure = normalize_registry(secure)
+    insecure = normalize_registry(insecure)
+    block = normalize_registry(block)
     return {
         "registries.search": {"registries": secure["registries"]},
         "registries.insecure": {"registries": insecure["registries"]},

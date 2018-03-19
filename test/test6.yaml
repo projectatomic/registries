@@ -1,0 +1,9 @@
+registries:
+  - example-1.com:5000//
+  - example-2.com/
+
+insecure_registries:
+  - example-3.com:6000
+
+block_registries:
+  - example-4.com

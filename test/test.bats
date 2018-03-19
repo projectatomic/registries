@@ -4,8 +4,8 @@ TEST=1
 PYTHON=${PYTHON:-/usr/bin/python3}
 PWD=$(pwd)
 TEST_DIR="${PWD}/test"
-BINARY="/usr/libexec/registries"
-MIGRATOR="/usr/libexec/registries_migrator"
+BINARY=${BINARY:-"/usr/libexec/registries"}
+MIGRATOR=${MIGRATOR:-"/usr/libexec/registries_migrator"}
 
 STR_RESULT[0]='--add-registry registry1 --insecure-registry registry2 --block-registry registry3 '
 JSON_RESULT[0]='{"registries.search": {"registries": ["registry1"]}, "registries.insecure": {"registries": ["registry2"]}, "registries.block": {"registries": ["registry3"]}}'
@@ -24,6 +24,9 @@ JSON_RESULT[4]='{"registries.search": {"registries": ["registry1", "registry1a"]
 
 STR_RESULT[5]=''
 JSON_RESULT[5]='{"registries.search": {"registries": []}, "registries.insecure": {"registries": []}, "registries.block": {"registries": []}}'
+
+STR_RESULT[6]='--add-registry example-1.com:5000 --add-registry example-2.com --insecure-registry example-3.com:6000 --block-registry example-4.com '
+JSON_RESULT[6]='{"registries.search": {"registries": ["example-1.com:5000", "example-2.com"]}, "registries.insecure": {"registries": ["example-3.com:6000"]}, "registries.block": {"registries": ["example-4.com"]}}'
 
 @test "yaml test 0" {
 	TN=0
@@ -71,6 +74,14 @@ JSON_RESULT[5]='{"registries.search": {"registries": []}, "registries.insecure":
 	[ "$output" = "${STR_RESULT[$TN]}" ]
 }
 
+@test "yaml test 6" {
+	TN=6
+	run "$PYTHON" "$BINARY" -i "$TEST_DIR/test$TN.yaml"
+	echo "${STR_RESULT[$TN]}"
+	echo "$output"
+	[ "$output" = "${STR_RESULT[$TN]}" ]
+}
+
 @test "yaml json test 0" {
 	TN=0
 	run "$PYTHON" "$BINARY" -j -i "$TEST_DIR/test$TN.yaml"
@@ -113,6 +124,12 @@ JSON_RESULT[5]='{"registries.search": {"registries": []}, "registries.insecure":
 	[ "$output" = "${JSON_RESULT[$TN]}" ]
 }
 
+@test "yaml json test 6" {
+	TN=6
+	run "$PYTHON" "$BINARY" -j -i "$TEST_DIR/test$TN.yaml"
+	echo "$output"
+	[ "$output" = "${JSON_RESULT[$TN]}" ]
+}
 
 
 # TOML tests
@@ -164,6 +181,13 @@ JSON_RESULT[5]='{"registries.search": {"registries": []}, "registries.insecure":
 	[ "$output" = "${STR_RESULT[$TN]}" ]
 }
 
+@test "toml test 6" {
+	TN=6
+	run "$PYTHON" "$BINARY" -i "$TEST_DIR/test$TN.toml"
+	echo "${STR_RESULT[$TN]}"
+	echo "$output"
+	[ "$output" = "${STR_RESULT[$TN]}" ]
+}
 
 # Migration tests
 @test "migrator test 0" {
@@ -247,6 +271,20 @@ registries = []
 
 ["registries.block"]
 registries = []'
+	echo "$output"
+	[ "$output" = "$RESULT" ]
+}
+
+@test "migrator test 6" {
+	run "$PYTHON" "$MIGRATOR" -i "$TEST_DIR/test6.yaml"
+	RESULT='["registries.search"]
+registries = ["example-1.com:5000", "example-2.com"]
+
+["registries.insecure"]
+registries = ["example-3.com:6000"]
+
+["registries.block"]
+registries = ["example-4.com"]'
 	echo "$output"
 	[ "$output" = "$RESULT" ]
 }
