@@ -18,6 +18,9 @@ MANPAGES_MD = $(wildcard docs/*.md)
 docs/%.1: docs/%.1.md
 	$(GO_MD2MAN) -in $< -out $@.tmp && touch $@.tmp && mv $@.tmp $@
 
+docs/%.5: docs/%.5.md
+	$(GO_MD2MAN) -in $< -out $@.tmp && touch $@.tmp && mv $@.tmp $@
+
 .PHONY: docs
 docs: $(MANPAGES_MD:%.md=%)
 
